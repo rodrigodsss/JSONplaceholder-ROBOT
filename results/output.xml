@@ -1,0 +1,1130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.1 (Python 3.14.2 on win32)" generated="2026-09-27T02:15:05.358631" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="C:\Users\rodri\OneDrive\Documentos\JSONplaceholder-ROBOT\tests">
+<suite id="s1-s1" name="Cadastro Posts" source="C:\Users\rodri\OneDrive\Documentos\JSONplaceholder-ROBOT\tests\cadastro_posts.robot">
+<kw name="Criar Sessao Jsonplaceholder" owner="jsonplaceholder" type="SETUP">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-09-27T02:15:05.577667" level="INFO">Creating Session using : alias=jsonplaceholder, url=https://jsonplaceholder.typicode.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>${SESSAO}</arg>
+<arg>${BASE_URL}</arg>
+<arg>verify=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-09-27T02:15:05.577492" elapsed="0.000319"/>
+</kw>
+<doc>Cria a sessão HTTP reutilizada por todos os testes.</doc>
+<status status="PASS" start="2026-09-27T02:15:05.577126" elapsed="0.000753"/>
+</kw>
+<test id="s1-s1-t1" name="Cadastrar Post Com Sucesso" line="10">
+<kw name="Cadastrar Post" owner="jsonplaceholder">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-09-27T02:15:05.581079" level="INFO">&amp;{payload} = { userId=1 | title=Meu Primeiro Post | body=Conteudo de teste via Robot Framework }</msg>
+<var>&amp;{payload}</var>
+<arg>userId=${user_id}</arg>
+<arg>title=${title}</arg>
+<arg>body=${body}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-09-27T02:15:05.580657" elapsed="0.000450"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-09-27T02:15:06.107215" level="INFO">POST Request : url=https://jsonplaceholder.typicode.com/posts 
+ path_url=/posts 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json; charset=UTF-8', 'Content-Length': '94'} 
+ body=b'{"userId": "1", "title": "Meu Primeiro Post", "body": "Conteudo de teste via Robot Framework"}' 
+ </msg>
+<msg time="2026-09-27T02:15:06.107390" level="INFO">POST Response : url=https://jsonplaceholder.typicode.com/posts 
+ status=201, reason=Created 
+ headers={'Date': 'Sun, 27 Sep 2026 05:15:00 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '115', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': 'Location', 'Cache-Control': 'no-cache', 'etag': 'W/"73-/mWoQDC67AFFr+lu5dehqYHxcMA"', 'expires': '-1', 'location': 'https://jsonplaceholder.typicode.com/posts/101', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=P1fTsYh%2BgbBeOXHFIzAOzPXp%2FWtOLFbm9aXfSwQpjBo%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1790486100"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=P1fTsYh%2BgbBeOXHFIzAOzPXp%2FWtOLFbm9aXfSwQpjBo%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1790486100"', 'Server': 'cloudflare', 'vary': 'Origin, X-HTTP-Method-Override, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '999', 'x-ratelimit-reset': '1790486131', 'cf-cache-status': 'DYNAMIC', 'CF-RAY': 'a418072f4ad3f200-GRU', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={
+  "userId": "1",
+  "title": "Meu Primeiro Post",
+  "body": "Conteudo de teste via Robot Framework",
+  "id": 101
+} 
+ </msg>
+<msg time="2026-09-27T02:15:06.107579" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSAO}</arg>
+<arg>/posts</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${HEADERS_JSON}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-27T02:15:05.581188" elapsed="0.526429"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2026-09-27T02:15:06.107721" elapsed="0.000074"/>
+</return>
+<msg time="2026-09-27T02:15:06.107990" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>user_id=1</arg>
+<arg>title=Meu Primeiro Post</arg>
+<arg>body=Conteudo de teste via Robot Framework</arg>
+<doc>POST /posts - cria um novo post (userId, title, body).</doc>
+<status status="PASS" start="2026-09-27T02:15:05.579839" elapsed="0.528180"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-27T02:15:06.109169" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.108438" elapsed="0.000792"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.json()}[title]</arg>
+<arg>Meu Primeiro Post</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.109540" elapsed="0.000853"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.json()}[body]</arg>
+<arg>Conteudo de teste via Robot Framework</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.110672" elapsed="0.000720"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${response.json()}[userId]</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.111619" elapsed="0.000859"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.112704" elapsed="0.000684"/>
+</kw>
+<doc>POST /posts</doc>
+<tag>cadastro</tag>
+<tag>post</tag>
+<status status="PASS" start="2026-09-27T02:15:05.577927" elapsed="0.536057"/>
+</test>
+<test id="s1-s1-t2" name="Cadastrar Comment Com Sucesso" line="20">
+<kw name="Cadastrar Comment" owner="jsonplaceholder">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-09-27T02:15:06.116525" level="INFO">&amp;{payload} = { postId=1 | name=Comentario de Teste | email=teste@robotframework.com | body=Comentario gerado via automacao }</msg>
+<var>&amp;{payload}</var>
+<arg>postId=${post_id}</arg>
+<arg>name=${name}</arg>
+<arg>email=${email}</arg>
+<arg>body=${body}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.115899" elapsed="0.000729"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-09-27T02:15:06.245061" level="INFO">POST Request : url=https://jsonplaceholder.typicode.com/comments 
+ path_url=/comments 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json; charset=UTF-8', 'Content-Length': '126'} 
+ body=b'{"postId": "1", "name": "Comentario de Teste", "email": "teste@robotframework.com", "body": "Comentario gerado via automacao"}' 
+ </msg>
+<msg time="2026-09-27T02:15:06.245172" level="INFO">POST Response : url=https://jsonplaceholder.typicode.com/comments 
+ status=201, reason=Created 
+ headers={'Date': 'Sun, 27 Sep 2026 05:15:00 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '149', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': 'Location', 'Cache-Control': 'no-cache', 'etag': 'W/"95-6nUA+v9F7nnGXaR18jhbmvjS1jo"', 'expires': '-1', 'location': 'https://jsonplaceholder.typicode.com/comments/501', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=P1fTsYh%2BgbBeOXHFIzAOzPXp%2FWtOLFbm9aXfSwQpjBo%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1790486100"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=P1fTsYh%2BgbBeOXHFIzAOzPXp%2FWtOLFbm9aXfSwQpjBo%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1790486100"', 'Server': 'cloudflare', 'vary': 'Origin, X-HTTP-Method-Override, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '998', 'x-ratelimit-reset': '1790486131', 'cf-cache-status': 'DYNAMIC', 'CF-RAY': 'a41807302bcdf200-GRU', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={
+  "postId": "1",
+  "name": "Comentario de Teste",
+  "email": "teste@robotframework.com",
+  "body": "Comentario gerado via automacao",
+  "id": 501
+} 
+ </msg>
+<msg time="2026-09-27T02:15:06.245310" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSAO}</arg>
+<arg>/comments</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${HEADERS_JSON}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.117149" elapsed="0.128183"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2026-09-27T02:15:06.245398" elapsed="0.000045"/>
+</return>
+<msg time="2026-09-27T02:15:06.245560" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>post_id=1</arg>
+<arg>name=Comentario de Teste</arg>
+<arg>email=teste@robotframework.com</arg>
+<arg>body=Comentario gerado via automacao</arg>
+<doc>POST /comments - cria um novo comentário (postId, name, email, body).</doc>
+<status status="PASS" start="2026-09-27T02:15:06.115369" elapsed="0.130220"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-27T02:15:06.246685" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.246054" elapsed="0.000681"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${response.json()}[postId]</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.246971" elapsed="0.000504"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.json()}[email]</arg>
+<arg>teste@robotframework.com</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.247715" elapsed="0.000454"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.248404" elapsed="0.000329"/>
+</kw>
+<doc>POST /comments</doc>
+<tag>cadastro</tag>
+<tag>post</tag>
+<status status="PASS" start="2026-09-27T02:15:06.114526" elapsed="0.134463"/>
+</test>
+<test id="s1-s1-t3" name="Cadastrar Album Com Sucesso" line="33">
+<kw name="Cadastrar Album" owner="jsonplaceholder">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-09-27T02:15:06.250067" level="INFO">&amp;{payload} = { userId=1 | title=Album de Ferias }</msg>
+<var>&amp;{payload}</var>
+<arg>userId=${user_id}</arg>
+<arg>title=${title}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.249763" elapsed="0.000331"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-09-27T02:15:06.377764" level="INFO">POST Request : url=https://jsonplaceholder.typicode.com/albums 
+ path_url=/albums 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json; charset=UTF-8', 'Content-Length': '43'} 
+ body=b'{"userId": "1", "title": "Album de Ferias"}' 
+ </msg>
+<msg time="2026-09-27T02:15:06.377893" level="INFO">POST Response : url=https://jsonplaceholder.typicode.com/albums 
+ status=201, reason=Created 
+ headers={'Date': 'Sun, 27 Sep 2026 05:15:00 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '62', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': 'Location', 'Cache-Control': 'no-cache', 'etag': 'W/"3e-5uX7TfKdTTB1F9Msy/dYChw3JBA"', 'expires': '-1', 'location': 'https://jsonplaceholder.typicode.com/albums/101', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=P1fTsYh%2BgbBeOXHFIzAOzPXp%2FWtOLFbm9aXfSwQpjBo%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1790486100"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=P1fTsYh%2BgbBeOXHFIzAOzPXp%2FWtOLFbm9aXfSwQpjBo%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1790486100"', 'Server': 'cloudflare', 'vary': 'Origin, X-HTTP-Method-Override, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '997', 'x-ratelimit-reset': '1790486131', 'cf-cache-status': 'DYNAMIC', 'CF-RAY': 'a4180730fcb5f200-GRU', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={
+  "userId": "1",
+  "title": "Album de Ferias",
+  "id": 101
+} 
+ </msg>
+<msg time="2026-09-27T02:15:06.378057" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSAO}</arg>
+<arg>/albums</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${HEADERS_JSON}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.250162" elapsed="0.127930"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2026-09-27T02:15:06.378192" elapsed="0.000053"/>
+</return>
+<msg time="2026-09-27T02:15:06.378388" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>user_id=1</arg>
+<arg>title=Album de Ferias</arg>
+<doc>POST /albums - cria um novo álbum (userId, title).</doc>
+<status status="PASS" start="2026-09-27T02:15:06.249558" elapsed="0.128851"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-27T02:15:06.379122" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.378633" elapsed="0.000535"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.json()}[title]</arg>
+<arg>Album de Ferias</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.379319" elapsed="0.000463"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${response.json()}[userId]</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.379921" elapsed="0.000419"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.380474" elapsed="0.000439"/>
+</kw>
+<doc>POST /albums</doc>
+<tag>cadastro</tag>
+<tag>post</tag>
+<status status="PASS" start="2026-09-27T02:15:06.249222" elapsed="0.131877"/>
+</test>
+<test id="s1-s1-t4" name="Cadastrar Photo Com Sucesso" line="42">
+<kw name="Cadastrar Photo" owner="jsonplaceholder">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-09-27T02:15:06.382935" level="INFO">&amp;{payload} = { albumId=1 | title=Foto de Teste | url=https://via.placeholder.com/600 | thumbnailUrl=https://via.placeholder.com/150 }</msg>
+<var>&amp;{payload}</var>
+<arg>albumId=${album_id}</arg>
+<arg>title=${title}</arg>
+<arg>url=${url}</arg>
+<arg>thumbnailUrl=${thumbnail_url}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.382339" elapsed="0.000622"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-09-27T02:15:06.509448" level="INFO">POST Request : url=https://jsonplaceholder.typicode.com/photos 
+ path_url=/photos 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json; charset=UTF-8', 'Content-Length': '135'} 
+ body=b'{"albumId": "1", "title": "Foto de Teste", "url": "https://via.placeholder.com/600", "thumbnailUrl": "https://via.placeholder.com/150"}' 
+ </msg>
+<msg time="2026-09-27T02:15:06.509560" level="INFO">POST Response : url=https://jsonplaceholder.typicode.com/photos 
+ status=201, reason=Created 
+ headers={'Date': 'Sun, 27 Sep 2026 05:15:00 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '159', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': 'Location', 'Cache-Control': 'no-cache', 'etag': 'W/"9f-MDUPfKxIB/ewk6JkzfYKEqHAXKM"', 'expires': '-1', 'location': 'https://jsonplaceholder.typicode.com/photos/5001', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=P1fTsYh%2BgbBeOXHFIzAOzPXp%2FWtOLFbm9aXfSwQpjBo%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1790486100"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=P1fTsYh%2BgbBeOXHFIzAOzPXp%2FWtOLFbm9aXfSwQpjBo%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1790486100"', 'Server': 'cloudflare', 'vary': 'Origin, X-HTTP-Method-Override, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '996', 'x-ratelimit-reset': '1790486131', 'cf-cache-status': 'DYNAMIC', 'CF-RAY': 'a4180731cdb6f200-GRU', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={
+  "albumId": "1",
+  "title": "Foto de Teste",
+  "url": "https://via.placeholder.com/600",
+  "thumbnailUrl": "https://via.placeholder.com/150",
+  "id": 5001
+} 
+ </msg>
+<msg time="2026-09-27T02:15:06.509703" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSAO}</arg>
+<arg>/photos</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${HEADERS_JSON}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.383085" elapsed="0.126647"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2026-09-27T02:15:06.509800" elapsed="0.000405"/>
+</return>
+<msg time="2026-09-27T02:15:06.510436" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>album_id=1</arg>
+<arg>title=Foto de Teste</arg>
+<arg>url=https://via.placeholder.com/600</arg>
+<arg>thumbnail_url=https://via.placeholder.com/150</arg>
+<doc>POST /photos - cria uma nova foto (albumId, title, url, thumbnailUrl).</doc>
+<status status="PASS" start="2026-09-27T02:15:06.381889" elapsed="0.128576"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-27T02:15:06.511683" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.510909" elapsed="0.000846"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.json()}[title]</arg>
+<arg>Foto de Teste</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.512084" elapsed="0.000906"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${response.json()}[albumId]</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.513213" elapsed="0.000576"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.514005" elapsed="0.000359"/>
+</kw>
+<doc>POST /photos</doc>
+<tag>cadastro</tag>
+<tag>post</tag>
+<status status="PASS" start="2026-09-27T02:15:06.381420" elapsed="0.133169"/>
+</test>
+<test id="s1-s1-t5" name="Cadastrar User Com Sucesso" line="55">
+<kw name="Cadastrar User" owner="jsonplaceholder">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-09-27T02:15:06.517379" level="INFO">&amp;{payload} = { name=Usuario Teste | username=usuario.teste | email=usuario.teste@robotframework.com }</msg>
+<var>&amp;{payload}</var>
+<arg>name=${name}</arg>
+<arg>username=${username}</arg>
+<arg>email=${email}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.516786" elapsed="0.000639"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-09-27T02:15:06.682488" level="INFO">POST Request : url=https://jsonplaceholder.typicode.com/users 
+ path_url=/users 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json; charset=UTF-8', 'Content-Length': '99'} 
+ body=b'{"name": "Usuario Teste", "username": "usuario.teste", "email": "usuario.teste@robotframework.com"}' 
+ </msg>
+<msg time="2026-09-27T02:15:06.682614" level="INFO">POST Response : url=https://jsonplaceholder.typicode.com/users 
+ status=201, reason=Created 
+ headers={'Date': 'Sun, 27 Sep 2026 05:15:01 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '119', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': 'Location', 'Cache-Control': 'no-cache', 'etag': 'W/"77-h7nU3tb8TZsHONL/FwfPYDrlpRA"', 'expires': '-1', 'location': 'https://jsonplaceholder.typicode.com/users/11', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=P1fTsYh%2BgbBeOXHFIzAOzPXp%2FWtOLFbm9aXfSwQpjBo%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1790486100"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=P1fTsYh%2BgbBeOXHFIzAOzPXp%2FWtOLFbm9aXfSwQpjBo%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1790486100"', 'Server': 'cloudflare', 'vary': 'Origin, X-HTTP-Method-Override, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '995', 'x-ratelimit-reset': '1790486131', 'cf-cache-status': 'DYNAMIC', 'CF-RAY': 'a4180732aea2f200-GRU', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={
+  "name": "Usuario Teste",
+  "username": "usuario.teste",
+  "email": "usuario.teste@robotframework.com",
+  "id": 11
+} 
+ </msg>
+<msg time="2026-09-27T02:15:06.682740" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSAO}</arg>
+<arg>/users</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${HEADERS_JSON}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.517620" elapsed="0.165142"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2026-09-27T02:15:06.682829" elapsed="0.000036"/>
+</return>
+<msg time="2026-09-27T02:15:06.682980" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>name=Usuario Teste</arg>
+<arg>username=usuario.teste</arg>
+<arg>email=usuario.teste@robotframework.com</arg>
+<doc>POST /users - cria um novo usuário (name, username, email).</doc>
+<status status="PASS" start="2026-09-27T02:15:06.516329" elapsed="0.166669"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-27T02:15:06.683877" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.683336" elapsed="0.000590"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.json()}[name]</arg>
+<arg>Usuario Teste</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.684115" elapsed="0.000433"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.json()}[username]</arg>
+<arg>usuario.teste</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.684764" elapsed="0.000445"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.685426" elapsed="0.000532"/>
+</kw>
+<doc>POST /users</doc>
+<tag>cadastro</tag>
+<tag>post</tag>
+<status status="PASS" start="2026-09-27T02:15:06.515187" elapsed="0.170975"/>
+</test>
+<test id="s1-s1-t6" name="Cadastrar Todo Com Sucesso" line="64">
+<kw name="Cadastrar Todo" owner="jsonplaceholder">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-09-27T02:15:06.687673" level="INFO">&amp;{payload} = { userId=1 | title=Finalizar automacao Robot Framework | completed=False }</msg>
+<var>&amp;{payload}</var>
+<arg>userId=${user_id}</arg>
+<arg>title=${title}</arg>
+<arg>completed=${completed}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.687149" elapsed="0.000548"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-09-27T02:15:06.816494" level="INFO">POST Request : url=https://jsonplaceholder.typicode.com/todos 
+ path_url=/todos 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json; charset=UTF-8', 'Content-Length': '83'} 
+ body=b'{"userId": "1", "title": "Finalizar automacao Robot Framework", "completed": false}' 
+ </msg>
+<msg time="2026-09-27T02:15:06.816795" level="INFO">POST Response : url=https://jsonplaceholder.typicode.com/todos 
+ status=201, reason=Created 
+ headers={'Date': 'Sun, 27 Sep 2026 05:15:01 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '104', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': 'Location', 'Cache-Control': 'no-cache', 'etag': 'W/"68-PzUoKjfQNB1Du0Rg/jZ6UbacGbc"', 'expires': '-1', 'location': 'https://jsonplaceholder.typicode.com/todos/201', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=uy%2B3h%2Bcvx3%2B6lytavW5B2dRXr%2BFLHYby9hMYpmMNPBM%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1790486101"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=uy%2B3h%2Bcvx3%2B6lytavW5B2dRXr%2BFLHYby9hMYpmMNPBM%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1790486101"', 'Server': 'cloudflare', 'vary': 'Origin, X-HTTP-Method-Override, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '994', 'x-ratelimit-reset': '1790486131', 'cf-cache-status': 'DYNAMIC', 'CF-RAY': 'a4180733bfb3f200-GRU', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={
+  "userId": "1",
+  "title": "Finalizar automacao Robot Framework",
+  "completed": false,
+  "id": 201
+} 
+ </msg>
+<msg time="2026-09-27T02:15:06.817162" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSAO}</arg>
+<arg>/todos</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${HEADERS_JSON}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.687781" elapsed="0.129462"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2026-09-27T02:15:06.817429" elapsed="0.000077"/>
+</return>
+<msg time="2026-09-27T02:15:06.817776" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>user_id=1</arg>
+<arg>title=Finalizar automacao Robot Framework</arg>
+<arg>completed=${False}</arg>
+<doc>POST /todos - cria um novo todo (userId, title, completed).</doc>
+<status status="PASS" start="2026-09-27T02:15:06.686839" elapsed="0.130987"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-27T02:15:06.820285" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.818476" elapsed="0.001981"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.json()}[title]</arg>
+<arg>Finalizar automacao Robot Framework</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.820945" elapsed="0.001427"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${response.json()}[userId]</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.822931" elapsed="0.001809"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.825324" elapsed="0.000994"/>
+</kw>
+<doc>POST /todos</doc>
+<tag>cadastro</tag>
+<tag>post</tag>
+<status status="PASS" start="2026-09-27T02:15:06.686483" elapsed="0.140386"/>
+</test>
+<doc>Cobertura completa de requisições POST (cadastro) da API JSONPlaceholder.
+Cada recurso é validado quanto ao status code, ao id retornado
+(a API sempre responde com id=101 em criações fake) e ao eco do payload enviado.</doc>
+<status status="PASS" start="2026-09-27T02:15:05.403554" elapsed="1.425243"/>
+</suite>
+<suite id="s1-s2" name="Crud Completo" source="C:\Users\rodri\OneDrive\Documentos\JSONplaceholder-ROBOT\tests\crud_completo.robot">
+<kw name="Criar Sessao Jsonplaceholder" owner="jsonplaceholder" type="SETUP">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-09-27T02:15:06.837213" level="INFO">Creating Session using : alias=jsonplaceholder, url=https://jsonplaceholder.typicode.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>${SESSAO}</arg>
+<arg>${BASE_URL}</arg>
+<arg>verify=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-09-27T02:15:06.836511" elapsed="0.001062"/>
+</kw>
+<doc>Cria a sessão HTTP reutilizada por todos os testes.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.835997" elapsed="0.001699"/>
+</kw>
+<test id="s1-s2-t1" name="Listar Todos Os Posts" line="9">
+<kw name="Listar Posts" owner="jsonplaceholder">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2026-09-27T02:15:07.167409" level="INFO">GET Request : url=https://jsonplaceholder.typicode.com/posts 
+ path_url=/posts 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-09-27T02:15:07.167670" level="INFO">GET Response : url=https://jsonplaceholder.typicode.com/posts 
+ status=200, reason=OK 
+ headers={'Date': 'Sun, 27 Sep 2026 05:15:01 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'Cache-Control': 'max-age=43200', 'Content-Encoding': 'gzip', 'etag': 'W/"6b80-Ybsq/K6GwwqrYkAsFxqDXGC7DoM"', 'expires': '-1', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=X142%2FmrKvHw146wPE8TJxa19abTOuGVBPgEr063%2BGAs%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1785332313"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=X142%2FmrKvHw146wPE8TJxa19abTOuGVBPgEr063%2BGAs%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1785332313"', 'Server': 'cloudflare', 'vary': 'Origin, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '999', 'x-ratelimit-reset': '1785332363', 'Age': '13527', 'cf-cache-status': 'HIT', 'CF-RAY': 'a41807369a68a4cc-GRU', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body=[
+  {
+    "userId": 1,
+    "id": 1,
+    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+    "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+  },
+  {
+    "userId": 1,
+    "id": 2,
+    "title": "qui est esse",
+    "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
+  },
+  {
+    "userId": 1,
+    "id": 3,
+    "title": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
+    "body": "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut"
+  },
+  {
+    "userId": 1,
+    "id": 4,
+    "title": "eum et est occaecati",
+    "body": "ullam et saepe reiciendis voluptatem adipisci\nsit amet autem assumenda provident rerum culpa\nquis hic commodi nesciunt rem tenetur doloremque ipsam iure\nquis sunt voluptatem rerum illo velit"
+  },
+  {
+    "userId": 1,
+    "id": 5,
+    "title": "nesciunt quas odio",
+    "body": "repudiandae veniam quaerat sunt sed\nalias aut fugiat sit autem sed est\nvoluptatem omnis possimus esse voluptatibus quis\nest aut tenetur dolor neque"
+  },
+  {
+    "userId": 1,
+    "id": 6,
+    "title": "dolorem eum magni eos aperiam quia",
+    "body": "ut aspernatur corporis harum nihil quis provident sequi\nmollitia nobis aliquid molestiae\nperspiciatis et ea nemo ab reprehenderit accusantium quas\nvoluptate dolores velit et doloremque molestiae"
+  },
+  {
+    "userId": 1,
+    "id": 7,
+    "title": "magnam facilis autem",
+    "body": "dolore placeat quibusdam ea quo vitae\nmagni quis enim qui quis quo nemo aut saepe\nquidem repellat excepturi ut quia\nsunt ut sequi eos ea sed quas"
+  },
+  {
+    "userId": 1,
+    "id": 8,
+    "title": "dolorem dolore est ipsam",
+    "body": "dignissimos aperiam dolorem qui eum\nfacilis quibusdam animi sint suscipit qui sint possimus cum\nquaerat magni maiores excepturi\nipsam ut commodi dolor voluptatum modi aut vitae"
+  },
+  {
+    "userId": 1,
+    "id": 9,
+    "title": "nesciunt iure omnis dolorem tempora et accusantium",
+    "body": "consectetur animi nesciunt iure dolore\nenim quia ad\nveniam autem ut quam aut nobis\net est aut quod aut provident voluptas autem voluptas"
+  },
+  {
+    "userId": 1,
+    "id": 10,
+    "title": "optio molestias id quia eum",
+    "body": "quo et expedita modi cum officia vel magni\ndoloribus qui repudiandae\nvero nisi sit\nquos veniam quod sed accusamus veritatis error"
+  },
+  {
+    "userId": 2,
+    "id": 11,
+    "title": "et ea vero quia laudantium autem",
+    "body": "delectus reiciendis molestiae occaecati non minima eveniet qui voluptatibus\naccusamus in eum beatae sit\nvel qui neque voluptates ut commodi qui incidunt\nut animi commodi"
+  },
+  {
+    "userId": 2,
+    "id": 12,
+    "title": "in quibusdam tempore odit est dolorem",
+    "body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"
+  },
+  {
+    "userId": 2,
+    "id": 13,
+    "title": "dolorum ut in voluptas mollitia et saepe quo animi",
+    "body": "aut dicta possimus sint mollitia voluptas commodi quo doloremque\niste corrupti reiciendis voluptatem eius rerum\nsit cumque quod eligendi laborum minima\nperferendis recusandae assumenda consectetur porro architecto ipsum ipsam"
+  },
+  {
+    "userId": 2,
+    "id": 14,
+    "title": "voluptatem eligendi optio",
+    "body": "fuga et accusamus dolorum perferendis illo voluptas\nnon doloremque neque facere\nad qui dolorum molestiae beatae\nsed aut voluptas totam sit illum"
+  },
+  {
+    "userId": 2,
+    "id": 15,
+    "title": "eveniet quod temporibus",
+    "body": "reprehenderit quos placeat\nvelit minima officia dolores impedit repudiandae molestiae nam\nvoluptas recusandae quis delectus\nofficiis harum fugiat vitae"
+  },
+  {
+    "userId": 2,
+    "id": 16,
+    "title": "sint suscipit perspiciatis velit dolorum rerum ipsa laboriosam odio",
+    "body": "suscipit nam nisi quo aperiam aut\nasperiores eos fugit maiores voluptatibus quia\nvoluptatem quis ullam qui in alias quia est\nconsequatur magni mollitia accusamus ea nisi voluptate dicta"
+  },
+  {
+    "userId": 2,
+    "id": 17,
+    "title": "fugit voluptas sed molestias voluptatem provident",
+    "body": "eos voluptas et aut odit natus earum\naspernatur fuga molestiae ullam\ndeserunt ratione qui eos\nqui nihil ratione nemo velit ut aut id quo"
+  },
+  {
+    "userId": 2,
+    "id": 18,
+    "title": "voluptate et itaque vero tempora molestiae",
+    "body": "eveniet quo quis\nlaborum totam consequatur non dolor\nut et est repudiandae\nest voluptatem vel debitis et magnam"
+  },
+  {
+    "userId": 2,
+    "id": 19,
+    "title": "adipisci placeat illum aut reiciendis qui",
+    "body": "illum quis cupiditate provident sit magnam\nea sed aut omnis\nveniam maiores ullam consequatur atque\nadipisci quo iste expedita sit quos voluptas"
+  },
+  {
+    "userId": 2,
+    "id": 20,
+    "title": "doloribus ad provident suscipit at",
+    "body": "qui consequuntur ducimus possimus quisquam amet similique\nsuscipit porro ipsam amet\neos veritatis officiis exercitationem vel fugit aut necessitatibus totam\nomnis rerum consequatur expedita quidem cumque explicabo"
+  },
+  {
+    "userId": 3,
+    "id": 21,
+    "title": "asperiores ea ipsam voluptatibus modi minima quia sint",
+    "body": "repellat aliquid praesentium dolorem quo\nsed totam minus non itaque\nnihil labore molestiae sunt dolor eveniet hic recusandae veniam\ntempora et tenetur expedita sunt"
+  },
+  {
+    "userId": 3,
+    "id": 22,
+    "title": "dolor sint quo a velit explicabo quia nam",
+    "body": "eos qui et ipsum ipsam suscipit aut\nsed omnis non odio\nexpedita earum mollitia molestiae aut atque rem suscipit\nnam impedit esse"
+  },
+  {
+    "userId": 3,
+    "id": 23,
+    "title": "maxime id vitae nihil numquam",
+    "body": "veritatis unde neque eligendi\nquae quod architecto quo neque vitae\nest illo sit tempora doloremque fugit quod\net et vel beatae sequi ullam sed tenetur perspiciatis"
+  },
+  {
+    "userId": 3,
+    "id": 24,
+    "title": "autem hic labore sunt dolores incidunt",
+    "body": "enim et ex nulla\nomnis voluptas quia qui\nvoluptatem consequatur numquam aliquam sunt\ntotam recusandae id dignissimos aut sed asperiores deserunt"
+  },
+  {
+    "userId": 3,
+    "id": 25,
+    "title": "rem alias distinctio quo quis",
+    "body": "ullam consequatur ut\nomnis quis sit vel consequuntur\nipsa eligendi ipsum molestiae et omnis error nostrum\nmolestiae illo tempore quia et distinctio"
+  },
+  {
+    "userId": 3,
+    "id": 26,
+    "title": "est et quae odit qui non",
+    "body": "similique esse doloribus nihil accusamus\nomnis dolorem fuga consequuntur reprehenderit fugit recusandae temporibus\nperspiciatis cum ut laudantium\nomnis aut molestiae vel vero"
+  },
+  {
+    "userId": 3,
+    "id": 27,
+    "title": "quasi id et eos tenetur aut quo autem",
+    "body": "eum sed dolores ipsam sint possimus debitis occaecati\ndebitis qui qui et\nut placeat enim earum aut odit facilis\nconsequatur suscipit necessitatibus rerum sed inventore temporibus consequatur"
+  },
+  {
+    "userId": 3,
+    "id": 28,
+    "title": "delectus ullam et corporis nulla voluptas sequi",
+    "body": "non et quaerat ex quae ad maiores\nmaiores recusandae totam aut blanditiis mollitia quas illo\nut voluptatibus voluptatem\nsimilique nostrum eum"
+  },
+  {
+    "userId": 3,
+    "id": 29,
+    "title": "iusto eius quod necessitatibus culpa ea",
+    "body": "odit magnam ut saepe sed non qui\ntempora atque nihil\naccusamus illum doloribus illo dolor\neligendi repudiandae odit magni similique sed cum maiores"
+  },
+  {
+    "userId": 3,
+    "id": 30,
+    "title": "a quo magni similique perferendis",
+    "body": "alias dolor cumque\nimpedit blanditiis non eveniet odio maxime\nblanditiis amet eius quis tempora quia autem rem\na provident perspiciatis quia"
+  },
+  {
+    "userId": 4,
+    "id": 31,
+    "title": "ullam ut quidem id aut vel consequuntur",
+    "body": "debitis eius sed quibusdam non quis consectetur vitae\nimpedit ut qui consequatur sed aut in\nquidem sit nostrum et maiores adipisci atque\nquaerat voluptatem adipisci repudiandae"
+  },
+  {
+    "userId": 4,
+    "id": 32,
+    "title": "doloremque illum aliquid sunt",
+    "body": "deserunt eos nobis asperiores et hic\nest debitis repellat molestiae optio\nnihil ratione ut eos beatae quibusdam distinctio maiores\nearum voluptates et aut adipisci ea maiores voluptas maxime"
+  },
+  {
+    "userId": 4,
+    "id": 33,
+    "title": "qui explicabo molestiae dolorem",
+    "body": "rerum ut et numquam laborum odit est sit\nid qui sint in\nquasi tenetur tempore aperiam et quaerat qui in\nrerum officiis sequi cumque quod"
+  },
+  {
+    "userId": 4,
+    "id": 34,
+    "title": "magnam ut rerum iure",
+    "body": "ea velit perferendis earum ut voluptatem voluptate itaque iusto\ntotam pariatur in\nnemo voluptatem voluptatem autem magni tempora minima in\nest distinctio qui assumenda accusamus dignissimos officia nesciunt nobis"
+  },
+  {
+    "userId": 4,
+    "id": 35,
+    "title": "id nihil consequatur molestias animi provident",
+    "body": "nisi error delectus possimus ut eligendi vitae\nplaceat eos harum cupiditate facilis reprehenderit voluptatem beatae\nmodi ducimus quo illum voluptas eligendi\net nobis quia fugit"
+  },
+  {
+    "userId": 4,
+    "id": 36,
+    "title": "fuga nam accusamus voluptas reiciendis itaque",
+    "body": "ad mollitia et omnis minus architecto odit\nvoluptas doloremque maxime aut non ipsa qui alias veniam\nblanditiis culpa aut quia nihil cumque facere et occaecati\nqui aspernatur quia eaque ut aperiam inventore"
+  },
+  {
+    "userId": 4,
+    "id": 37,
+    "title": "provident vel ut sit ratione est... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg time="2026-09-27T02:15:07.167939" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSAO}</arg>
+<arg>/posts</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.838914" elapsed="0.329046"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2026-09-27T02:15:07.168048" elapsed="0.000065"/>
+</return>
+<msg time="2026-09-27T02:15:07.168288" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<doc>GET /posts - lista todos os posts.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.838561" elapsed="0.329755"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-27T02:15:07.169663" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.168797" elapsed="0.000924"/>
+</kw>
+<kw name="Length Should Be" owner="BuiltIn">
+<msg time="2026-09-27T02:15:07.170771" level="INFO">Length is 100.</msg>
+<arg>${response.json()}</arg>
+<arg>100</arg>
+<doc>Verifies that the length of the given item is correct.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.169991" elapsed="0.000825"/>
+</kw>
+<doc>GET /posts</doc>
+<tag>get</tag>
+<status status="PASS" start="2026-09-27T02:15:06.837791" elapsed="0.333291"/>
+</test>
+<test id="s1-s2-t2" name="Obter Post Especifico" line="16">
+<kw name="Obter Post Por Id" owner="jsonplaceholder">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2026-09-27T02:15:07.187022" level="INFO">GET Request : url=https://jsonplaceholder.typicode.com/posts/1 
+ path_url=/posts/1 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-09-27T02:15:07.187107" level="INFO">GET Response : url=https://jsonplaceholder.typicode.com/posts/1 
+ status=200, reason=OK 
+ headers={'Date': 'Sun, 27 Sep 2026 05:15:01 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'Cache-Control': 'max-age=43200', 'etag': 'W/"124-yiKdLzqO5gfBrJFrcdJ8Yq0LGnU"', 'expires': '-1', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=vm67FVLNHsCgrFgubRa04ooDeMKdgwXS9H3i2IbjuoY%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1785194657"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=vm67FVLNHsCgrFgubRa04ooDeMKdgwXS9H3i2IbjuoY%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1785194657"', 'Server': 'cloudflare', 'vary': 'Origin, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '999', 'x-ratelimit-reset': '1785194663', 'Age': '4340', 'cf-cache-status': 'HIT', 'Content-Encoding': 'gzip', 'CF-RAY': 'a4180736ca79a4cc-GRU', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={
+  "userId": 1,
+  "id": 1,
+  "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+  "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+} 
+ </msg>
+<msg time="2026-09-27T02:15:07.187207" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSAO}</arg>
+<arg>/posts/${post_id}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.172392" elapsed="0.014833"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2026-09-27T02:15:07.187288" elapsed="0.000031"/>
+</return>
+<msg time="2026-09-27T02:15:07.187419" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>post_id=1</arg>
+<doc>GET /posts/{id} - obtém um post específico.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.172024" elapsed="0.015423"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-27T02:15:07.188479" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.187943" elapsed="0.000683"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-27T02:15:07.189556" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.json()}[id]</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.188882" elapsed="0.000720"/>
+</kw>
+<doc>GET /posts/{id}</doc>
+<tag>get</tag>
+<status status="PASS" start="2026-09-27T02:15:07.171573" elapsed="0.018199"/>
+</test>
+<test id="s1-s2-t3" name="Listar Comentarios De Um Post" line="23">
+<kw name="Listar Comments Por Post" owner="jsonplaceholder">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2026-09-27T02:15:07.206727" level="INFO">GET Request : url=https://jsonplaceholder.typicode.com/posts/1/comments 
+ path_url=/posts/1/comments 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-09-27T02:15:07.206834" level="INFO">GET Response : url=https://jsonplaceholder.typicode.com/posts/1/comments 
+ status=200, reason=OK 
+ headers={'Date': 'Sun, 27 Sep 2026 05:15:01 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'Cache-Control': 'max-age=43200', 'Content-Encoding': 'gzip', 'etag': 'W/"5e6-4bSPS5tq8F8ZDeFJULWh6upjp7U"', 'expires': '-1', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=vaP1XDogeDtnPrFvtH0nR3ImG6DBRoL%2Fjp%2FI3k9q2%2Bw%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1786715567"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=vaP1XDogeDtnPrFvtH0nR3ImG6DBRoL%2Fjp%2FI3k9q2%2Bw%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1786715567"', 'Server': 'cloudflare', 'vary': 'Origin, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '999', 'x-ratelimit-reset': '1786715590', 'Age': '422', 'cf-cache-status': 'HIT', 'CF-RAY': 'a4180736ea7fa4cc-GRU', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body=[
+  {
+    "postId": 1,
+    "id": 1,
+    "name": "id labore ex et quam laborum",
+    "email": "Eliseo@gardner.biz",
+    "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
+  },
+  {
+    "postId": 1,
+    "id": 2,
+    "name": "quo vero reiciendis velit similique earum",
+    "email": "Jayne_Kuhic@sydney.com",
+    "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et"
+  },
+  {
+    "postId": 1,
+    "id": 3,
+    "name": "odio adipisci rerum aut animi",
+    "email": "Nikita@garfield.biz",
+    "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione"
+  },
+  {
+    "postId": 1,
+    "id": 4,
+    "name": "alias odio sit",
+    "email": "Lew@alysha.tv",
+    "body": "non et atque\noccaecati deserunt quas accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur itaque dolor\net qui rerum deleniti ut occaecati"
+  },
+  {
+    "postId": 1,
+    "id": 5,
+    "name": "vero eaque aliquid doloribus et culpa",
+    "email": "Hayden@althea.biz",
+    "body": "harum non quasi et ratione\ntempore iure ex voluptates in ratione\nharum architecto fugit inventore cupiditate\nvoluptates magni quo et"
+  }
+] 
+ </msg>
+<msg time="2026-09-27T02:15:07.206991" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSAO}</arg>
+<arg>/posts/${post_id}/comments</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.190675" elapsed="0.016338"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2026-09-27T02:15:07.207076" elapsed="0.000035"/>
+</return>
+<msg time="2026-09-27T02:15:07.207217" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>post_id=1</arg>
+<doc>GET /posts/{id}/comments - lista comentários de um post.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.190465" elapsed="0.016769"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-27T02:15:07.208079" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.207517" elapsed="0.000609"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-09-27T02:15:07.208924" level="INFO">Length is 5.</msg>
+<arg>${response.json()}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.208475" elapsed="0.000484"/>
+</kw>
+<doc>GET /posts/{id}/comments</doc>
+<tag>get</tag>
+<status status="PASS" start="2026-09-27T02:15:07.190071" elapsed="0.019040"/>
+</test>
+<test id="s1-s2-t4" name="Atualizar Post Completo Com Sucesso" line="30">
+<kw name="Atualizar Post Completo" owner="jsonplaceholder">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-09-27T02:15:07.211195" level="INFO">&amp;{payload} = { id=1 | userId=1 | title=Titulo Atualizado | body=Corpo atualizado via PUT }</msg>
+<var>&amp;{payload}</var>
+<arg>id=${post_id}</arg>
+<arg>userId=${user_id}</arg>
+<arg>title=${title}</arg>
+<arg>body=${body}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.210595" elapsed="0.000631"/>
+</kw>
+<kw name="PUT On Session" owner="RequestsLibrary">
+<msg time="2026-09-27T02:15:07.340869" level="INFO">PUT Request : url=https://jsonplaceholder.typicode.com/posts/1 
+ path_url=/posts/1 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json; charset=UTF-8', 'Content-Length': '92'} 
+ body=b'{"id": "1", "userId": "1", "title": "Titulo Atualizado", "body": "Corpo atualizado via PUT"}' 
+ </msg>
+<msg time="2026-09-27T02:15:07.340952" level="INFO">PUT Response : url=https://jsonplaceholder.typicode.com/posts/1 
+ status=200, reason=OK 
+ headers={'Date': 'Sun, 27 Sep 2026 05:15:01 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'Cache-Control': 'no-cache', 'etag': 'W/"64-om+KUj1hU3Jf0JfdAsVk9ic8CPI"', 'expires': '-1', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=uy%2B3h%2Bcvx3%2B6lytavW5B2dRXr%2BFLHYby9hMYpmMNPBM%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1790486101"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=uy%2B3h%2Bcvx3%2B6lytavW5B2dRXr%2BFLHYby9hMYpmMNPBM%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1790486101"', 'Server': 'cloudflare', 'vary': 'Origin, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '993', 'x-ratelimit-reset': '1790486131', 'cf-cache-status': 'DYNAMIC', 'Content-Encoding': 'gzip', 'CF-RAY': 'a41807370a8aa4cc-GRU', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={
+  "id": 1,
+  "userId": "1",
+  "title": "Titulo Atualizado",
+  "body": "Corpo atualizado via PUT"
+} 
+ </msg>
+<msg time="2026-09-27T02:15:07.341059" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSAO}</arg>
+<arg>/posts/${post_id}</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${HEADERS_JSON}</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.211364" elapsed="0.129716"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2026-09-27T02:15:07.341144" elapsed="0.000035"/>
+</return>
+<msg time="2026-09-27T02:15:07.341288" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>post_id=1</arg>
+<arg>user_id=1</arg>
+<arg>title=Titulo Atualizado</arg>
+<arg>body=Corpo atualizado via PUT</arg>
+<doc>PUT /posts/{id} - substitui o post inteiro.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.210184" elapsed="0.131124"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-27T02:15:07.342004" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.341530" elapsed="0.000522"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.json()}[title]</arg>
+<arg>Titulo Atualizado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.342268" elapsed="0.000689"/>
+</kw>
+<doc>PUT /posts/{id}</doc>
+<tag>put</tag>
+<status status="PASS" start="2026-09-27T02:15:07.209576" elapsed="0.133602"/>
+</test>
+<test id="s1-s2-t5" name="Atualizar Post Parcialmente Com Sucesso" line="41">
+<kw name="Atualizar Post Parcial" owner="jsonplaceholder">
+<kw name="PATCH On Session" owner="RequestsLibrary">
+<msg time="2026-09-27T02:15:07.471005" level="INFO">PATCH Request : url=https://jsonplaceholder.typicode.com/posts/1 
+ path_url=/posts/1 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json; charset=UTF-8', 'Content-Length': '35'} 
+ body=b'{"title": "Somente o Titulo Mudou"}' 
+ </msg>
+<msg time="2026-09-27T02:15:07.471131" level="INFO">PATCH Response : url=https://jsonplaceholder.typicode.com/posts/1 
+ status=200, reason=OK 
+ headers={'Date': 'Sun, 27 Sep 2026 05:15:01 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'Cache-Control': 'no-cache', 'etag': 'W/"f0-12nCKtnJGFe9dBajgG8ULNrBjxw"', 'expires': '-1', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=uy%2B3h%2Bcvx3%2B6lytavW5B2dRXr%2BFLHYby9hMYpmMNPBM%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1790486101"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=uy%2B3h%2Bcvx3%2B6lytavW5B2dRXr%2BFLHYby9hMYpmMNPBM%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1790486101"', 'Server': 'cloudflare', 'vary': 'Origin, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '992', 'x-ratelimit-reset': '1790486131', 'cf-cache-status': 'DYNAMIC', 'Content-Encoding': 'gzip', 'CF-RAY': 'a4180737dadaa4cc-GRU', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={
+  "userId": 1,
+  "id": 1,
+  "title": "Somente o Titulo Mudou",
+  "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+} 
+ </msg>
+<msg time="2026-09-27T02:15:07.471320" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSAO}</arg>
+<arg>/posts/${post_id}</arg>
+<arg>json=${campos}</arg>
+<arg>headers=${HEADERS_JSON}</arg>
+<doc>Sends a PATCH request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.344216" elapsed="0.127130"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2026-09-27T02:15:07.471455" elapsed="0.000051"/>
+</return>
+<msg time="2026-09-27T02:15:07.471636" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>post_id=1</arg>
+<arg>title=Somente o Titulo Mudou</arg>
+<doc>PATCH /posts/{id} - atualiza campos específicos.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.343975" elapsed="0.127679"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-27T02:15:07.473116" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.471925" elapsed="0.001268"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.json()}[title]</arg>
+<arg>Somente o Titulo Mudou</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.473562" elapsed="0.000808"/>
+</kw>
+<doc>PATCH /posts/{id}</doc>
+<tag>patch</tag>
+<status status="PASS" start="2026-09-27T02:15:07.343547" elapsed="0.131119"/>
+</test>
+<test id="s1-s2-t6" name="Deletar Post Com Sucesso" line="48">
+<kw name="Deletar Post" owner="jsonplaceholder">
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2026-09-27T02:15:07.603499" level="INFO">DELETE Request : url=https://jsonplaceholder.typicode.com/posts/1 
+ path_url=/posts/1 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2026-09-27T02:15:07.603593" level="INFO">DELETE Response : url=https://jsonplaceholder.typicode.com/posts/1 
+ status=200, reason=OK 
+ headers={'Date': 'Sun, 27 Sep 2026 05:15:01 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '2', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'Cache-Control': 'no-cache', 'etag': 'W/"2-vyGp6PvFo4RvsFtPoIWeCReyIC8"', 'expires': '-1', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=uy%2B3h%2Bcvx3%2B6lytavW5B2dRXr%2BFLHYby9hMYpmMNPBM%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1790486101"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=uy%2B3h%2Bcvx3%2B6lytavW5B2dRXr%2BFLHYby9hMYpmMNPBM%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1790486101"', 'Server': 'cloudflare', 'vary': 'Origin, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '991', 'x-ratelimit-reset': '1790486131', 'cf-cache-status': 'DYNAMIC', 'CF-RAY': 'a4180738ab12a4cc-GRU', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={} 
+ </msg>
+<msg time="2026-09-27T02:15:07.603704" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSAO}</arg>
+<arg>/posts/${post_id}</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.476212" elapsed="0.127511"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2026-09-27T02:15:07.603782" elapsed="0.000038"/>
+</return>
+<msg time="2026-09-27T02:15:07.603940" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>post_id=1</arg>
+<doc>DELETE /posts/{id} - remove o post.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.475792" elapsed="0.128166"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-27T02:15:07.605086" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-27T02:15:07.604266" elapsed="0.000897"/>
+</kw>
+<doc>DELETE /posts/{id}</doc>
+<tag>delete</tag>
+<status status="PASS" start="2026-09-27T02:15:07.475216" elapsed="0.130330"/>
+</test>
+<doc>Cobertura dos demais verbos HTTP (GET, PUT, PATCH, DELETE) da API JSONPlaceholder,
+complementando o cadastro (POST) coberto em cadastro_posts.robot.</doc>
+<status status="PASS" start="2026-09-27T02:15:06.831051" elapsed="0.775037"/>
+</suite>
+<status status="PASS" start="2026-09-27T02:15:05.360601" elapsed="2.246378"/>
+</suite>
+<statistics>
+<total>
+<stat pass="12" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="6" fail="0" skip="0">cadastro</stat>
+<stat pass="1" fail="0" skip="0">delete</stat>
+<stat pass="3" fail="0" skip="0">get</stat>
+<stat pass="1" fail="0" skip="0">patch</stat>
+<stat pass="6" fail="0" skip="0">post</stat>
+<stat pass="1" fail="0" skip="0">put</stat>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="12" fail="0" skip="0">Tests</stat>
+<stat name="Cadastro Posts" id="s1-s1" pass="6" fail="0" skip="0">Tests.Cadastro Posts</stat>
+<stat name="Crud Completo" id="s1-s2" pass="6" fail="0" skip="0">Tests.Crud Completo</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
